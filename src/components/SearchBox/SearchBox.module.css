@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.search {
+    font-family: "Montserrat", "Regular", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+}
+.find {
+    border: 1px solid #808080;
+        border-radius: 4px;
+        width: 260px;
+        height: 20px;
+        margin: 8px 0;
+        padding: 8px 0 8px 16px;
+        font-family: "Montserrat", "Regular", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 150%;
+        letter-spacing: 0.04em;
+}
+.find:hover {
+    border: 2px solid #352c9c;
+}

@@ -1,16 +1,15 @@
-import React from "react";
+import Contact from '../Contact/Contact';
+import css from '../ContactList/ContactList.module.css';
 
-export default function ContactList() {
+
+export default function ContactList({contacts}) {
     return (
-        <div>
-            <input></input>
-            <button>Delete</button>
-             <input></input>
-            <button>Delete</button>
-             <input></input>
-            <button>Delete</button>
-             <input></input>
-            <button>Delete</button>
-        </div>
+        <ul className={css.list}>
+            {contacts.map(({id, name, number }) => (
+                <li key={{id}} className={css.item} >
+                <Contact  name={name}  number={number}/>
+                </li>
+            ))}
+        </ul>
     );
 }

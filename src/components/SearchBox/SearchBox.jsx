@@ -3,9 +3,9 @@ import css from '../SearchBox/SearchBox.module.css';
 
 export default function SearchBox () {
     return (
-        <div>
-            <label>Find contacts by name</label>
-            <input></input>
+        <div className={css.wrapper}>
+            <label className={css.search}>Find contacts by name</label>
+            <input className={css.find}></input>
         </div>
     );
 }
