@@ -1,22 +1,30 @@
-import initialContacts from '../../contacts.json';
-import { useState } from 'react';
-import 'react-dom';
+import React, { useState, useEffect } from 'react';
 import css from './App.module.css';
 import ContactForm from '../ContactForm/ContactForm';
 import SearchBox from '../SearchBox/SearchBox';
 import ContactList from '../ContactList/ContactList';
 
-
 export default function App() {
-    const [contacts, setContacts] = useState(initialContacts);
+    // Зчитування контактів з локального сховища або початкове значення
+    const getInitialContacts = () => {
+        const savedContacts = localStorage.getItem('contacts');
+        return savedContacts ? JSON.parse(savedContacts) : [];
+    };
+
+    const [contacts, setContacts] = useState(getInitialContacts);
     const [search, setSearch] = useState('');
+
+    // Зберігання контактів в локальному сховищі при їх зміні
+    useEffect(() => {
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+    }, [contacts]);
 
     const addContact = (newContact) => { 
         setContacts((prevContacts) => [...prevContacts, newContact]);
     };
     
     const deleteContact = (contactId) => {
-        setContacts((prevContacts) => 
+        setContacts((prevContacts) =>
             prevContacts.filter((contact) => contact.id !== contactId)
         );
     };
