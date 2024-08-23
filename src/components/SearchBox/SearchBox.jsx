@@ -1,11 +1,12 @@
 import React from "react";
 import css from '../SearchBox/SearchBox.module.css';
 
-export default function SearchBox () {
+export default function SearchBox ({ value, onSearch}) {
     return (
         <div className={css.wrapper}>
-            <label className={css.search}>Find contacts by name</label>
-            <input className={css.find}></input>
+            <p className={css.search}>Find contacts by name</p>
+            <input className={css.find} type="text" value={value} onChange={(e) => onSearch(e.target.value)}
+            />
         </div>
     );
 }

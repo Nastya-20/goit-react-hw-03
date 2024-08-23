@@ -1,68 +1,63 @@
-import  'react';
-import { Formik } from 'formik';
+import React from 'react';
+import { Field, Formik, Form, ErrorMessage } from 'formik';
+import * as Yup from "yup";
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
+const ContactSchema = Yup.object().shape({
+   userName: Yup.string()
+    .min(3, "Too short, min 3 letters!")
+    .max(50, "Too long, max 50 letters!")
+    .required("This field is required!"),
+  userPhone: Yup.string()
+    .matches(/^\d{3}-\d{2}-\d{2}$/, "Must be exactly 7 digits separated by dashes")
+    .required("This field is required!"),
+});
 
-export default function ContactForm() {
+export default function ContactForm({ onAdd }) {
+  const handleSubmit = (values, actions) => {
+    const newContact = {
+      id: nanoid(),
+      name: values.userName,
+      number: values.userPhone,
+    };
+    onAdd(newContact);    
+    actions.resetForm();
+  };
+
   return (
-    <div>
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        validate={values => {
-          const errors = {};
-          if (!values.email) {
-            errors.email = 'Required';
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = 'Invalid email address';
-          }
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          const id = nanoid();
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-         }) => (
-          <form  className={css.form} onSubmit={handleSubmit}>
-            <label>Name</label>
-            <input className={css.email}
-              type="email"
-              name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
-            {errors.email && touched.email && errors.email}
-            <label>Number</label>
-            <input className={css.password}
-              type="password"
-              name="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
-            {errors.password && touched.password && errors.password}
-            <button className={css.add} type="submit" disabled={isSubmitting}>
-              Add Contact
-            </button>
-          </form>
-        )}
-      </Formik>
-    </div>
+    <Formik
+      initialValues={{
+        userName: "",
+        userPhone: "",
+      }}
+      validationSchema={ContactSchema}
+      onSubmit={handleSubmit}
+    >
+      <Form className={css.form}>
+        <div className={css.formGroup}>
+          <label className={css.label} htmlFor="userName">Name</label>
+          <Field className={css.name}
+            type="text"
+            name="userName"
+            id="userName"
+          />
+          <ErrorMessage name="userName" component="span" className={css.error} />
+        </div>
+        <div className={css.formGroup}>
+          <label className={css.label} htmlFor="userPhone">Number</label>
+          <Field className={css.phone}
+            type="text"
+            name="userPhone" 
+            id="userPhone"
+          />
+          <ErrorMessage name="userPhone" component="span" className={css.error} />
+        </div>
+        <button className={css.add} type="submit">
+          Add Contact
+        </button>
+      </Form>
+    </Formik>
   );
-};
+}
 

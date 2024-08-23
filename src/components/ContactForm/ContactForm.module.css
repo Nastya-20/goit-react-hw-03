@@ -1,19 +1,20 @@
 .form {
-    background: #fff;
+    background: #f6f6f7;
     border: 1px solid #000;
     border-radius: 8px;
     padding: 24px;
     width: 230px;
-    min-height: 156px;
+    min-height: 200px;
     font-family: "Montserrat", "Regular", sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.04em;
     color: #2e2f42;
+    text-align: center;
 }
 
-label {
+.label {
     font-family: "Montserrat", "Regular", sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -21,31 +22,24 @@ label {
     letter-spacing: 0.04em;
 }
 
-.email, .password{
+.name,
+.phone {
     border: 1px solid #808080;
     border-radius: 4px;
     width: 212px;
     height: 20px;
-    margin: 10px 0;
-    padding: 8px 0 8px 16px;
+     padding: 8px 0 8px 16px;
     font-family: "Montserrat", "Regular", sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.04em;
+    margin-top: 5px;
 }
 
-.email:hover, .password:hover {
+.name:hover,
+.phone:hover {
     border: 1px solid #1a154d;
-}
-
-.email:active:placeholder {
-    content: "Type area";
-    font-family: "Montserrat", "Regular", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
-    letter-spacing: 0.04em;
 }
 
 .add {
@@ -53,11 +47,10 @@ label {
     padding: 8px 16px;
     min-width: 86px;
     height: 40px;
-    background: #4e75ff;
+    background: #374a8f;
     align-items: center;
     border: none;
-    margin-top: 10px;
-    margin-left: 50px;
+    margin-top: 20px;
     font-family: "Montserrat", "Medium", sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -70,4 +63,18 @@ label {
 .add:hover,
 .add:focus {
     background: #6c8cff;
+}
+
+.formGroup {
+    position: relative;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.error {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    font-size: 12px;
+    color: red;
 }
