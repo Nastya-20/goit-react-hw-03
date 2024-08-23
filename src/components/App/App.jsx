@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import css from './App.module.css';
 import ContactForm from '../ContactForm/ContactForm';
 import SearchBox from '../SearchBox/SearchBox';
 import ContactList from '../ContactList/ContactList';
+import initialContacts from '../../contacts.json'; 
 
 export default function App() {
     // Зчитування контактів з локального сховища або початкове значення
-    const getInitialContacts = () => {
+    const fetchInitialContacts = () => {
         const savedContacts = localStorage.getItem('contacts');
-        return savedContacts ? JSON.parse(savedContacts) : [];
+        return savedContacts ? JSON.parse(savedContacts) : initialContacts;
     };
 
-    const [contacts, setContacts] = useState(getInitialContacts);
+    const [contacts, setContacts] = useState(fetchInitialContacts);
     const [search, setSearch] = useState('');
 
     // Зберігання контактів в локальному сховищі при їх зміні
@@ -42,4 +43,5 @@ export default function App() {
         </div>
     );
 }
+
 
